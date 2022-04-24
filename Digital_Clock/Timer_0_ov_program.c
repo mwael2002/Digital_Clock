@@ -4,8 +4,8 @@
  *  Created on: Oct 22, 2021
  *      Author: mwael
  */
-#include"D:/C/STD.Types.h"
-#include"D:/C/bit_calc.h"
+#include"STD.Types.h"
+#include"bit_calc.h"
 #include"Timer_0_ov_private.h"
 #include"Timer_0_ov_interface.h"
 void (*ptr_timer) (void);
