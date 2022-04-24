@@ -5,8 +5,8 @@
  *  Created on: Sep 11, 2021
  *      Author: mwael
  */
-#include"D:/C/bit_calc.h"
-#include"D:/C/STD.Types.h"
+#include"bit_calc.h"
+#include"STD.Types.h"
 #define F_CPU 8000000
 #include<avr/delay.h>
 #include"DIO_interface.h"
