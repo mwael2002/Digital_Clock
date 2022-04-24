@@ -21,7 +21,6 @@ void main(void){
 	U8 hr=10;
 	U8 state=PM;
 
-	DIO_set_pin_direction(Group_A,7,OUTPUT);
 	LCD_init();
 
 	LCD_string_pos("PM",0,9);
