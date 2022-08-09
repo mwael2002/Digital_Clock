@@ -7,9 +7,10 @@
 
 #ifndef TIMER_0_OV_PRIVATE_H_
 #define TIMER_0_OV_PRIVATE_H_
-#define TCCR0 *((U8*)0X53)
-#define TCNT0 *((U8*)0X52)
-#define TIMSK *((U8*)0X59)
-#define SREG *((U8*)0X5F)
+#define TCCR0 *((volatile U8*)0X53)
+#define TCNT0 *((volatile U8*)0X52)
+#define TIMSK *((volatile U8*)0X59)
+#define SREG *((volatile U8*)0X5F)
+#define OCR0 *((volatile U8*)0X5C)
 
 #endif /* TIMER_0_OV_PRIVATE_H_ */
