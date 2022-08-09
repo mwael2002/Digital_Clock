@@ -8,4 +8,9 @@ typedef signed short int S16;
 typedef signed long int S32;
 typedef float F32;
 typedef double F64;
+
+#define OK 		0
+#define NOK		1
+#define NULL ((void*)0)
+
 #endif
