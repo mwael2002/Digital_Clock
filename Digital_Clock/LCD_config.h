@@ -7,10 +7,10 @@
 
 #ifndef LCD_CONFIG_H_
 #define LCD_CONFIG_H_
-#define LCD_control_port Group_C
-#define LCD_Rs_pin 5
-#define LCD_Rw_pin 6
-#define LCD_E_pin 7
+#define LCD_control_port Group_D
+#define LCD_Rs_pin 0
+#define LCD_Rw_pin 1
+#define LCD_E_pin 2
 #define LCD_data_port Group_A
 #define LCD_data_pin_0 0
 #define LCD_data_pin_1 1
