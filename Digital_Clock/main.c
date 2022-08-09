@@ -24,18 +24,18 @@ void main(void){
 	DIO_set_pin_direction(Group_A,7,OUTPUT);
 	LCD_init();
 
-	LCD_write_string("PM",0,9);
+	LCD_write_string_pos("PM",0,9);
 
-	LCD_write_no(sec,0,7);
-	LCD_write_no(0,0,6);
+	LCD_write_no_pos(sec,0,7);
+	LCD_write_no_pos(0,0,6);
 
-	LCD_write_string(":",0,5);
+	LCD_write_string_pos(":",0,5);
 
-	LCD_write_no(min,0,3);
+	LCD_write_no_pos(min,0,3);
 
-	LCD_write_string(":",0,2);
+	LCD_write_string_pos(":",0,2);
 
-	LCD_write_no(hr,0,0);
+	LCD_write_no_pos(hr,0,0);
 
     desired_count=time_calculate(1000);
 
@@ -46,21 +46,21 @@ while(1){
 
 if((sec>next)&&(sec!=60)&&(sec<10)){
 	next++;
-LCD_write_no(sec,0,7);
+LCD_write_no_pos(sec,0,7);
 }
 if((sec>next)&&(sec!=60)&&(sec>9)){
 	next++;
-LCD_write_no(sec,0,6);
+LCD_write_no_pos(sec,0,6);
 }
 
 if((sec==60)&&(min<9)){
 	sec=0;
 	next=0;
 	min++;
-	LCD_write_no(sec,0,7);
-	LCD_write_no(0,0,6);
+	LCD_write_no_pos(sec,0,7);
+	LCD_write_no_pos(0,0,6);
 
-	LCD_write_no(min,0,4);
+	LCD_write_no_pos(min,0,4);
 }
 
 if((sec==60)&&(min>8)){
@@ -68,10 +68,10 @@ if((sec==60)&&(min>8)){
 	sec=0;
 	next=0;
 	min++;
-	LCD_write_no(sec,0,7);
-	LCD_write_no(0,0,6);
+	LCD_write_no_pos(sec,0,7);
+	LCD_write_no_pos(0,0,6);
 
-	LCD_write_no(min,0,3);
+	LCD_write_no_pos(min,0,3);
 }
 	else if(min==59){
 		min++;
@@ -84,13 +84,13 @@ if((min==60)&&(hr<9)){
 	    min=0;
 		hr++;
 
-		LCD_write_no(sec,0,7);
-		LCD_write_no(0,0,6);
+		LCD_write_no_pos(sec,0,7);
+		LCD_write_no_pos(0,0,6);
 
-		LCD_write_no(min,0,4);
-		LCD_write_no(0,0,3);
+		LCD_write_no_pos(min,0,4);
+		LCD_write_no_pos(0,0,3);
 
-		LCD_write_no(hr,0,1);
+		LCD_write_no_pos(hr,0,1);
 }
 if((min==60)&&(hr>8)&&(hr<11)){
 	    sec=0;
@@ -98,13 +98,13 @@ if((min==60)&&(hr>8)&&(hr<11)){
 	    min=0;
 		hr++;
 
-		LCD_write_no(sec,0,7);
-		LCD_write_no(0,0,6);
+		LCD_write_no_pos(sec,0,7);
+		LCD_write_no_pos(0,0,6);
 
-		LCD_write_no(min,0,4);
-		LCD_write_no(0,0,3);
+		LCD_write_no_pos(min,0,4);
+		LCD_write_no_pos(0,0,3);
 
-		LCD_write_no(hr,0,0);
+		LCD_write_no_pos(hr,0,0);
 }
 
 if((hr==12)&&(min==60)){
@@ -113,14 +113,14 @@ if((hr==12)&&(min==60)){
 	    min=0;
 		hr=1;
 
-		LCD_write_no(sec,0,7);
-		LCD_write_no(0,0,6);
+		LCD_write_no_pos(sec,0,7);
+		LCD_write_no_pos(0,0,6);
 
-		LCD_write_no(min,0,4);
-		LCD_write_no(0,0,3);
+		LCD_write_no_pos(min,0,4);
+		LCD_write_no_pos(0,0,3);
 
-		LCD_write_no(hr,0,1);
-		LCD_write_no(0,0,0);
+		LCD_write_no_pos(hr,0,1);
+		LCD_write_no_pos(0,0,0);
 }
 
 if((hr==11)&&(state==0)&&(min==60)){
@@ -130,15 +130,15 @@ if((hr==11)&&(state==0)&&(min==60)){
 		    hr=12;
             state=1;
 
-			LCD_write_string("PM",0,9);
+			LCD_write_string_pos("PM",0,9);
 
-			LCD_write_no(sec,0,7);
-			LCD_write_no(0,0,6);
+			LCD_write_no_pos(sec,0,7);
+			LCD_write_no_pos(0,0,6);
 
-			LCD_write_no(min,0,4);
-			LCD_write_no(0,0,3);
+			LCD_write_no_pos(min,0,4);
+			LCD_write_no_pos(0,0,3);
 
-			LCD_write_no(hr,0,0);
+			LCD_write_no_pos(hr,0,0);
 }
 
 if((hr==11)&&(state==1)&&(min==60)){
@@ -148,15 +148,15 @@ if((hr==11)&&(state==1)&&(min==60)){
 		    hr=12;
             state=0;
 
-			LCD_write_string("AM",0,9);
+			LCD_write_string_pos("AM",0,9);
 
-			LCD_write_no(sec,0,7);
-			LCD_write_no(0,0,6);
+			LCD_write_no_pos(sec,0,7);
+			LCD_write_no_pos(0,0,6);
 
-			LCD_write_no(min,0,4);
-			LCD_write_no(0,0,3);
+			LCD_write_no_pos(min,0,4);
+			LCD_write_no_pos(0,0,3);
 
-			LCD_write_no(hr,0,0);
+			LCD_write_no_pos(hr,0,0);
 }
 
 }
