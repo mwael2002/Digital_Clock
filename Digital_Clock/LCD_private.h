@@ -7,7 +7,8 @@
 
 #ifndef LCD_PRIVATE_H_
 #define LCD_PRIVATE_H_
-void LCD_write(U8 value);
 
+static void LCD_send_data(U8 data);
+static void LCD_send_cmd(U8 cmd);
 
 #endif /* LCD_PRIVATE_H_ */
