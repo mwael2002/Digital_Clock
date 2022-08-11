@@ -8,7 +8,7 @@
 #include"bit_calc.h"
 #include"Timer_0_ov_private.h"
 #include"Timer_0_ov_interface.h"
-#include"LCD_interface.h"
+
 
 void (*ptr_timer) (void)=0;
 U16 TCNT0_register_value;
