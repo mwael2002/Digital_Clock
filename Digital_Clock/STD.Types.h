@@ -7,10 +7,16 @@ typedef signed char S8;
 typedef signed short int S16;
 typedef signed long int S32;
 typedef float F32;
-typedef double F64;
+
+
+#define NULL ((void*)0)
 
 #define OK 		0
 #define NOK		1
-#define NULL ((void*)0)
+
+#define NULL_POINTER 2
+
+#define IDLE_FUNC 10
+#define BUSY_FUNC 11
 
 #endif

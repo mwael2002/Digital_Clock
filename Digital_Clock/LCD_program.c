@@ -28,7 +28,7 @@ void LCD_init(void){
     _delay_ms(40);
     LCD_send_cmd(0b00111000);
     _delay_us(50);
-    LCD_send_cmd(0b00001101);
+    LCD_send_cmd(0b00001100);
     _delay_us(50);
     LCD_send_cmd(1);
     _delay_ms(2);
