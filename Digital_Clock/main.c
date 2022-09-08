@@ -4,11 +4,11 @@
  *  Created on: Oct 15, 2021
  *      Author: mwael
  */
-#include"STD.Types.h"
 #include"DIO_interface.h"
 #include"Timer_interface.h"
 #include "GIE_interface.h"
 #include"LCD_interface.h"
+#include "STD_Types.h"
 
 #define AM 0
 #define PM 1
