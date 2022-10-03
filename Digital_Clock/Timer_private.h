@@ -44,10 +44,11 @@
 #define TIMER1_FAST_PWM_MODE_8_BIT                     3
 #define TIMER1_FAST_PWM_MODE_9_BIT                     4
 #define TIMER1_FAST_PWM_MODE_10_BIT                    5
-#define TIMER1_PHASECORRECT_PWM_MODE_8_BIT             6
-#define TIMER1_PHASECORRECT_PWM_MODE_9_BIT             7
-#define TIMER1_PHASECORRECT_PWM_MODE_10_BIT            8
-#define TIMER1_USE_ICU_WITH_NORMAL_MODE                9
+#define TIMER1_FAST_PWM_MODE_ICU1_TOP                  6
+#define TIMER1_PHASECORRECT_PWM_MODE_8_BIT             7
+#define TIMER1_PHASECORRECT_PWM_MODE_9_BIT             8
+#define TIMER1_PHASECORRECT_PWM_MODE_10_BIT            9
+#define TIMER1_USE_ICU_WITH_NORMAL_MODE                10
 
 
 #define TIMER1_PRESCALER_MASK                          0b11111000
@@ -83,6 +84,9 @@
 
 #define TIMER1_CMPB_PHASECORRECT_PWM_CLEAR_CMP_COUNTUP 2
 #define TIMER1_CMPB_PHASECORRECT_PWM_SET_CMP_COUNTUP   3
+
+#define TIMER1_ICU_TRIGGER_FALLING                     0
+#define TIMER1_ICU_TRIGGER_RISING                      1
 
 /************************************************************************************************************/
 

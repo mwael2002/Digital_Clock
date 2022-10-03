@@ -11,7 +11,7 @@
 #define LCD_Rs_pin 0
 #define LCD_Rw_pin 1
 #define LCD_E_pin 2
-#define LCD_data_port Group_A
+#define LCD_data_port Group_B
 #define LCD_data_pin_0 0
 #define LCD_data_pin_1 1
 #define LCD_data_pin_2 2

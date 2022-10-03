@@ -9,18 +9,20 @@
 #define TIMER_REGISTER_H_
 
 #define  TIMSK         *((volatile U8*)0x59)
-#define  TOIE0   0
-#define  OCIE0   1
-
-#define  TOIE1  2
-#define  OCIE1A  4
-#define  OCIE1B  3
-#define  TICIE1  5
 
 #define  TOIE2   6
 #define  OCIE2   7
 
-/*timer0***************************************************************************************************/
+#define  TICIE1  5
+#define  OCIE1A  4
+#define  OCIE1B  3
+#define  TOIE1   2
+
+#define  OCIE0   1
+#define  TOIE0   0
+
+
+/*timer0***************************************************************************************************************/
 #define  OCR0          *((volatile U8*)0x5c)
 
 #define  TCCR0         *((volatile U8*)0x53)

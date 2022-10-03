@@ -12,17 +12,19 @@
 #include "Timer_interface.h"
 
 
-void (*timer_ptr[3]) (void);
-
-#if TIMER1_USE_CMPB==1
-void (*CompareB_ptr) (void);
-#endif
-
 static U16 TCNTX[3];
 static U16 Timerx_prescaler[3]={TIMER0_PRESCALER,TIMER1_PRESCALER,TIMER2_PRESCALER};
 static U16 Timerx_overflow_time[3]={TIMER0_OVERFLOW_TIME_MILLISECONDS,TIMER1_OVERFLOW_TIME_MILLISECONDS
 		                   ,TIMER2_OVERFLOW_TIME_MILLISECONDS};
 
+
+
+void (*timer_ptr[3]) (void);
+void (*ICU_ptr)(void);
+
+#if TIMER1_USE_CMPB==1
+void (*CompareB_ptr) (void);
+#endif
 
 
 
@@ -161,8 +163,7 @@ void Timer1_init(void){
 
 #endif
 
-
-#elif TIMER1_MODE==TIMER1_FAST_PWM_MODE_10_BIT
+#elif TIMER1_MODE==TIMER1_FAST_PWM_MODE_9_BIT
 
 	clear_bit(TCCR1A,WGM10);
 	set_bit(TCCR1A,WGM11);
@@ -185,6 +186,24 @@ void Timer1_init(void){
 	set_bit(TCCR1A,WGM11);
 	set_bit(TCCR1B,WGM12);
 	clear_bit(TCCR1B,WGM13);
+
+	TCCR1A &= TIMER1_CMPA_CTC_PWM_MODE_MASK;
+    TCCR1A |= (TIMER1_CMPA_FAST_PWM_MODE_OUTPUT<<6);
+
+#if TIMER1_USE_CMPB==1
+
+    TCCR1A &= TIMER1_CMPB_CTC_PWM_MODE_MASK;
+    TCCR1A |= (TIMER1_CMPB_FAST_PWM_MODE_OUTPUT<<4);
+
+#endif
+
+
+#elif TIMER1_MODE==TIMER1_FAST_PWM_MODE_ICU1_TOP
+
+	clear_bit(TCCR1A,WGM10);
+	set_bit(TCCR1A,WGM11);
+	set_bit(TCCR1B,WGM12);
+	set_bit(TCCR1B,WGM13);
 
 	TCCR1A &= TIMER1_CMPA_CTC_PWM_MODE_MASK;
     TCCR1A |= (TIMER1_CMPA_FAST_PWM_MODE_OUTPUT<<6);
@@ -230,7 +249,7 @@ void Timer1_init(void){
 
 #endif
 
-#elif TIMER1_MODE==TIMER1_FAST_PWM_MODE_10_BIT
+#elif TIMER1_MODE==TIMER1_PHASECORRECT_PWM_MODE_10_BIT
 
 	set_bit(TCCR1A,WGM10);
 	set_bit(TCCR1A,WGM11);
@@ -246,6 +265,33 @@ void Timer1_init(void){
     TCCR1A |= (TIMER1_CMPB_FAST_PWM_MODE_OUTPUT<<4);
 
 #endif
+
+#elif TIMER1_MODE==TIMER1_USE_ICU_WITH_NORMAL_MODE
+	//Waveform Generation Mode work as normal mode
+	clear_bit(TCCR1A,WGM10);
+	clear_bit(TCCR1A,WGM11);
+	clear_bit(TCCR1B,WGM12);
+	clear_bit(TCCR1B,WGM13);
+
+
+	//set trigger to rising edge initially
+	assign_bit(TCCR1B,ICES1,TIMER1_ICU_INIT_TRIGGER);
+
+	//set noise canceler
+    #if TIMER1_ICU_NOISE_CANCELER==1
+    set_bit(TCCR1B,ICNC1);
+	#endif
+
+	//set the required preload
+    Overflow_time_calculate(TIMER1_ID);
+    TCNT1=TCNTX[1];
+
+    //timer1 over flow interrupt enable
+    set_bit(TIMSK,TOIE1);
+
+    //enable the ICU interrupt
+	set_bit(TIMSK,TICIE1);
+
 
 #else
 #error "wrong mode"
@@ -271,6 +317,40 @@ CompareB_ptr();
 #endif
 
 
+
+U16 ICU_Read_Input_Capture(void){
+	return ICR1;
+}
+
+void Set_ICR1(U16 ICR1_Value){
+	 ICR1=ICR1_Value;
+}
+
+void ICU_Set_Trigger(U8 Trigger_Source){
+	switch(Trigger_Source){
+	case FALLING_EDGE: clear_bit(TCCR1B,ICES1);
+	break;
+	case RISING_EDGE:  set_bit(TCCR1B,ICES1);
+	break;
+	}
+
+}
+
+
+U8 ICU_CallBack(void (*ptr)(void)){
+	U8 error_state=OK;
+
+	if(ptr != NULL){
+		ICU_ptr = ptr;
+	}
+	else error_state=NOK;
+	return error_state;
+}
+
+void __vector_6(void) __attribute((signal));
+void __vector_6(void){
+		ICU_ptr();
+}
 
 /*********************************************************************************************************************/
 
@@ -353,7 +433,9 @@ timer_ptr[TIMER2_ID]();
 /*********************************************************************************************************************/
 
 
-
+void Timer_Int_Enable_Disable(U8 Timer_interrupt,U8 Enable_Disable){
+	assign_bit(TIMSK,Timer_interrupt,Enable_Disable);
+}
 
 U32 Overflow_time_calculate(U8 Timer_Id){
     F32 count;

@@ -4,11 +4,12 @@
  *  Created on: Oct 15, 2021
  *      Author: mwael
  */
+#include "STD_Types.h"
 #include"DIO_interface.h"
 #include"Timer_interface.h"
 #include "GIE_interface.h"
 #include"LCD_interface.h"
-#include "STD_Types.h"
+#include "Keypad_interface.h"
 
 #define AM 0
 #define PM 1
@@ -22,9 +23,13 @@ U8 AM_PM_state;
 
 U8 sec;
 U16 desired_count;
+
 void time_value(void);
 void set_current_time(U8 current_hr,U8 current_min,U8 current_sec,U8 current_AM_PM_state);
 
+void sec_change(void);
+void min_change(void);
+void hour_change(void);
 
 void main(void){
 
