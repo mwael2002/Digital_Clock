@@ -9,14 +9,6 @@
 #define LCD_INTERFACE_H_
 
 
-#define init_right_top_limit 15
-#define init_right_bottom_limit 79
-#define init_left_top_limit 0
-#define init_left_bottom_limit 6
-
-
-
-
 void LCD_init(void);
 void LCD_clear(void);
 
@@ -30,8 +22,8 @@ void LCD_move_curser_bottom(void);
 void LCD_move_curser_top(void);
 
 void LCD_write_char(U8 character);
-void LCD_write_string(const char* string);
-U8 LCD_write_string_pos(const char* string,U8 y_pos,U8 x_pos);
+void LCD_write_string(U8* string);
+U8 LCD_write_string_pos(U8* string,U8 y_pos,U8 x_pos);
 void LCD_write_no(U32 num);
 void LCD_write_no_pos(U32 num,U8 y_pos,U8 x_pos);
 

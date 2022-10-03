@@ -5,7 +5,7 @@
  *  Created on: Sep 11, 2021
  *      Author: mwael
  */
-#include "STD_Types.h"
+#include"STD_Types.h"
 #include"bit_calc.h"
 #include<avr/delay.h>
 #include"DIO_interface.h"
@@ -13,12 +13,11 @@
 #include"LCD_private.h"
 #include"LCD_interface.h"
 
-
 S8 current_address;
-S8 right_top_limit=init_right_top_limit;
-S8 right_bottom_limit=init_right_bottom_limit;
-S8 left_top_limit=init_left_top_limit;
-S8 left_bottom_limit=init_left_bottom_limit;
+S8 right_top_limit;
+S8 right_bottom_limit;
+S8 left_top_limit;
+S8 left_bottom_limit;
 
 
 void LCD_init(void){
@@ -29,10 +28,17 @@ void LCD_init(void){
     _delay_ms(40);
     LCD_send_cmd(0b00111000);
     _delay_us(50);
-    LCD_send_cmd(0b00001100);
+    LCD_send_cmd(0b00001101);
     _delay_us(50);
     LCD_send_cmd(1);
     _delay_ms(2);
+
+    current_address=0;
+    right_top_limit=init_right_top_limit;
+    right_bottom_limit=init_right_bottom_limit;
+    left_top_limit=init_left_top_limit;
+    left_bottom_limit=init_left_bottom_limit;
+
 }
 void LCD_clear(void){
 	LCD_send_cmd(1);
@@ -114,7 +120,7 @@ void LCD_write_char(U8 character){
 		LCD_send_data(character);
 }
 
-void LCD_write_string(const char* string){
+void LCD_write_string(U8* string){
 		    U8 count=0;
 			while(string[count]!='\0'){
 				if(current_address==39){
@@ -134,7 +140,7 @@ void LCD_write_string(const char* string){
 				count++; current_address++;
 			}
 }
-U8 LCD_write_string_pos(const char* string,U8 y_pos,U8 x_pos){
+U8 LCD_write_string_pos(U8* string,U8 y_pos,U8 x_pos){
 		U8 error_state=OK;
 		if((y_pos<2)&&(x_pos<16)){
 			current_address=(x_pos+(right_top_limit-15)+(y_pos*64));
@@ -149,8 +155,8 @@ U8 LCD_write_string_pos(const char* string,U8 y_pos,U8 x_pos){
 }
 void LCD_write_no(U32 num){
 	U8 rem,arr_index=0;
-		static char str[15];
-		static char str_2[15];
+		static U8 str[20];
+		static U8 str_2[20];
 		if(num==0){
 			str_2[arr_index]='0';
 			arr_index++;
@@ -175,8 +181,8 @@ void LCD_write_no(U32 num){
 }
 void LCD_write_no_pos(U32 num,U8 y_pos, U8 x_pos){
 	U8 rem,arr_index=0;
-	static char str[15];
-	static char str_2[15];
+	static U8 str[20];
+	static U8 str_2[20];
 	if(num==0){
 		str_2[arr_index]='0';
 		arr_index++;
