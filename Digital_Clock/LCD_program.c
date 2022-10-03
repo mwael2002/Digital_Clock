@@ -102,7 +102,7 @@ void shift_display_right(void){
 
 
 void shift_entire_display_right_initial_pos(void){
-for(U8 count=0;count<24;count++){
+for(U8 counter=0;counter<24;counter++){
 	LCD_send_cmd(0b00011100);
 }
 current_address=init_left_bottom_limit;
@@ -115,37 +115,37 @@ left_bottom_limit=init_left_bottom_limit;
 
 
 
-void LCD_write_char(U8 character){
+void LCD_write_char(U8 Data){
 	DIO_set_pin_value(LCD_control_port,LCD_Rs_pin,HIGH);
-		LCD_send_data(character);
+		LCD_send_data(Data);
 }
 
-void LCD_write_string(U8* string){
-		    U8 count=0;
-			while(string[count]!='\0'){
+void LCD_write_string(const char* str){
+		    U8 counter=0;
+			while(str[counter]!='\0'){
 				if(current_address==39){
 					LCD_send_cmd(128+current_address);
-					LCD_write_char(string[count]);
+					LCD_write_char(str[counter]);
 
 					shift_entire_display_right_initial_pos();
 
-					count++;
+					counter++;
 					continue;
 				}
 				if((current_address==right_top_limit)||(current_address==right_bottom_limit)){
 				  shift_display_left();
 				  continue;
 				}
-				LCD_write_char(string[count]);
-				count++; current_address++;
+				LCD_write_char(str[counter]);
+				counter++; current_address++;
 			}
 }
-U8 LCD_write_string_pos(U8* string,U8 y_pos,U8 x_pos){
+U8 LCD_write_string_pos(const char* str,U8 y_pos,U8 x_pos){
 		U8 error_state=OK;
 		if((y_pos<2)&&(x_pos<16)){
 			current_address=(x_pos+(right_top_limit-15)+(y_pos*64));
 			LCD_send_cmd(128+current_address);
-			LCD_write_string(string);
+			LCD_write_string(str);
 
 		}
 	else{
@@ -153,25 +153,26 @@ U8 LCD_write_string_pos(U8* string,U8 y_pos,U8 x_pos){
 	}
 	return error_state;
 }
+
 void LCD_write_no(U32 num){
-	U8 rem,arr_index=0;
-		static U8 str[20];
-		static U8 str_2[20];
+	U8 rem,counter=0;
+		char str[20];
+		char str_2[20];
 		if(num==0){
-			str_2[arr_index]='0';
-			arr_index++;
+			str_2[counter]='0';
+			counter++;
 			str_2[1]='\0';
 		}
 		else{
 			while(num!=0){
 		rem=num%10;
-		str[arr_index]=rem+'0';
-		arr_index++;
+		str[counter]=rem+'0';
+		counter++;
 		num=num/10;
 		}
-			str[arr_index]='\0';
+			str[counter]='\0';
 			U8 j=0;
-			for(S8 i=(arr_index-1);i>=0;i--){
+			for(S8 i=(counter-1);i>=0;i--){
 				str_2[j]=str[i];
 				j++;
 			}
@@ -180,24 +181,24 @@ void LCD_write_no(U32 num){
 		LCD_write_string(str_2);
 }
 void LCD_write_no_pos(U32 num,U8 y_pos, U8 x_pos){
-	U8 rem,arr_index=0;
-	static U8 str[20];
-	static U8 str_2[20];
+	U8 rem,counter=0;
+	char str[20];
+	char str_2[20];
 	if(num==0){
-		str_2[arr_index]='0';
-		arr_index++;
+		str_2[counter]='0';
+		counter++;
 		str_2[1]='\0';
 	}
 	else{
 		while(num!=0){
 	rem=num%10;
-	str[arr_index]=rem+'0';
-	arr_index++;
+	str[counter]=rem+'0';
+	counter++;
 	num=num/10;
 	}
-		str[arr_index]='\0';
+		str[counter]='\0';
 		U8 j=0;
-		for(S8 i=(arr_index-1);i>=0;i--){
+		for(S8 i=(counter-1);i>=0;i--){
 			str_2[j]=str[i];
 			j++;
 		}
