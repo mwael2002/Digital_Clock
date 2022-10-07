@@ -248,21 +248,21 @@ void hour_change(void){
 	}
 
 	else if((hr==11)&&(AM_PM_state==AM)&&(min==60)){
-		        sec=0;
-			    next=0;
-			    min=0;
-			    hr=12;
-	            AM_PM_state=PM;
+		    sec=0;
+			next=0;
+		    min=0;
+			hr=12;
+	        AM_PM_state=PM;
 
-				LCD_write_string_pos("PM",0,9);
+		    LCD_write_string_pos("PM",0,9);
 
-				LCD_write_no_pos(sec,0,7);
-				LCD_write_no_pos(0,0,6);
+		    LCD_write_no_pos(sec,0,7);
+		    LCD_write_no_pos(0,0,6);
 
-				LCD_write_no_pos(min,0,4);
-				LCD_write_no_pos(0,0,3);
+			LCD_write_no_pos(min,0,4);
+			LCD_write_no_pos(0,0,3);
 
-				LCD_write_no_pos(hr,0,0);
+			LCD_write_no_pos(hr,0,0);
 	}
 
 	else if((hr==11)&&(AM_PM_state==PM)&&(min==60)){

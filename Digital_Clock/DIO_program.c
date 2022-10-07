@@ -9,7 +9,6 @@
 #include"DIO_register.h"
 #include"DIO_interface.h"
 
-
 U8 DIO_set_pin_direction(U8 port_no,U8 pin_no,U8 pin_direction){
 	U8 error_state=OK;
 	if(port_no >= DIO_Max_Port_no){
