@@ -67,7 +67,7 @@ void set_current_time(void){
 
     		Entered_no=KPD_status();
 
-    	}while(Entered_no==255);
+    	}while(Entered_no==No_pressed_key);
 
     	hr=hr*10+Entered_no;
     	LCD_write_no_pos(Entered_no,0,hr_count);
@@ -84,7 +84,7 @@ void set_current_time(void){
 
     		Entered_no=KPD_status();
 
-    	}while(Entered_no==255);
+    	}while(Entered_no==No_pressed_key);
 
     	min=min*10+Entered_no;
     	LCD_write_no_pos(Entered_no,0,min_count);
@@ -99,7 +99,7 @@ void set_current_time(void){
 
     		Entered_no=KPD_status();
 
-    	}while(Entered_no==255);
+    	}while(Entered_no==No_pressed_key);
 
     	sec=sec*10+Entered_no;
     	LCD_write_no_pos(Entered_no,0,sec_count);
@@ -113,7 +113,7 @@ void set_current_time(void){
 
 		AM_PM_state=KPD_status();
 
-	}while(AM_PM_state==255);
+	}while(AM_PM_state==No_pressed_key);
 
 
     LCD_clear();
