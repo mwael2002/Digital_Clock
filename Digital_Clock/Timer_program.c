@@ -266,7 +266,7 @@ void Timer1_init(void){
 
 #endif
 
-#elif TIMER1_MODE==TIMER1_USE_ICU_WITH_NORMAL_MODE
+#elif TIMER1_MODE==TIMER1_ICU_MODE
 	//Waveform Generation Mode work as normal mode
 	clear_bit(TCCR1A,WGM10);
 	clear_bit(TCCR1A,WGM11);
@@ -274,7 +274,7 @@ void Timer1_init(void){
 	clear_bit(TCCR1B,WGM13);
 
 
-	//set trigger to rising edge initially
+	//set trigger to rising/falling edge initially
 	assign_bit(TCCR1B,ICES1,TIMER1_ICU_INIT_TRIGGER);
 
 	//set noise canceler
@@ -282,12 +282,9 @@ void Timer1_init(void){
     set_bit(TCCR1B,ICNC1);
 	#endif
 
-	//set the required preload
-    Overflow_time_calculate(TIMER1_ID);
-    TCNT1=TCNTX[1];
+    TCNT1=0;
 
-    //timer1 over flow interrupt enable
-    set_bit(TIMSK,TOIE1);
+    ICR1=0;
 
     //enable the ICU interrupt
 	set_bit(TIMSK,TICIE1);
