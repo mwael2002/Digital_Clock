@@ -20,7 +20,6 @@ U8 min;
 U8 hr;
 U8 AM_PM_state;
 
-
 U16 desired_count;
 
 void time_value(void);
