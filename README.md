@@ -7,8 +7,8 @@ Eclipse IDE is used to develop the project.
 #### 1- DIO
 #### 2- Timer
 #### 3- LCD
-#### 4- Keybad
+#### 4- Keypad
 
 ## Hardware:
-### AVR Atmega32, LCD and Keybad. 
+### AVR Atmega32, LCD and Keypad. 
 
