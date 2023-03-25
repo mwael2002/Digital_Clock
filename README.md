@@ -1,5 +1,6 @@
 # Digital-Clock
 A Digital Clock that is showed on LCD that Counts time in AM/PM format and the initial time is entered by the user on keypad.
+
 Eclipse IDE is used to develop the project.
 
 ## Software Drivers:
@@ -9,5 +10,5 @@ Eclipse IDE is used to develop the project.
 #### 4- Keybad
 
 ## Hardware:
-### AVR Atnega32, LCD and Keybad. 
+### AVR Atmega32, LCD and Keybad. 
 
